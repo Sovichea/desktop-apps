@@ -514,7 +514,7 @@ namespace CEditorTools
 
             ParentHandle _parent = AscAppManager::windowHandleFromId(event->m_nSenderId);
             CFileDialogWrapper dlg(_parent);
-            dlg.setFormats(pData->get_SupportFormats());
+            dlg.setFormats(pData->get_SupportFormats(), pData->get_EnhancedUnicodeAvailable());
 
             CAscLocalSaveFileDialog * pSaveData = new CAscLocalSaveFileDialog();
             pSaveData->put_Id(pData->get_Id());
@@ -542,6 +542,7 @@ namespace CEditorTools
                             AscAppManager::GetFileFormatByExtentionForSave(pSaveData->get_Path());
 
                     pSaveData->put_FileType(format > -1 ? format : 0);
+                    pSaveData->put_EnhancedUnicode(dlg.isEnhancedUnicode());
                     Utils::addToRecent(_full_path.toStdWString());
                 }
             }
